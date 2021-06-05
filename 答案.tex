@@ -1,0 +1,20 @@
+\documentclass[a4paper,12pt,twoside]{article}
+\usepackage{CJK}
+\usepackage{geometry}
+\usepackage{amsmath, amssymb}
+\geometry{left=1.5cm, right=1.5cm, top=3cm, bottom=3cm}
+\begin{document}
+\begin{CJK*}{GBK}{song}
+\begin{itemize}
+\item[1)]
+若与变量x与y满足线性关系$y=kx+b$，现有一组测量值$(x_1,y_1 ),(x_2,y_2 )…(x_N,y_N )$，若在每一个测量点，对x的测量没有误差，对y的测量误差相同，试推导出用最小二乘法得到的k和b的估计值，用x与y测量值表示。\\
+（选做）若在每个测量点，对$x$的测量没有误差，对$y$的测量误差各不相同（第$i$个测量点$y$的误差为$\delta_i$），试推导最小二乘法给出的$k$和$b$的估计值，用$x$与$y$的测量值及$y$的测量误差表示
+\item[答:]若每个测量点$y$值测量误差都相等，$\chi^2(k, b|x,y)=\dfrac{1}{\delta^2}\sum^{i=N}_{i=1}(y_i-kx_i-b)^2$。
+最小二乘法要求：
+\begin{eqnarray*}
+\dfrac{\partial\chi^2}{\partial k}&=&2\sum^{i=N}_{i=1}(y_i-kx_i-b)x_i=0 \\
+\dfrac{\partial\chi^2}{\partial b}&=&2\sum^{i=N}_{i=1}(y_i-kx_i-b)=0
+\end{eqnarray*}
+\end{itemize}
+\end{CJK*}
+\end{document}
