@@ -148,7 +148,7 @@ E(x)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} xKe^{-(x^2+3xy+3y^2)} \m
 同理可以计算出$E(y)=0$。
 $x$和$y$的协方差矩阵为：
 \begin{eqnarray*}
-\begin{pmatrix}
+S=\begin{pmatrix}
 \mathrm{Cov}(x,x) & \mathrm{Cov}(x,y) \\
 \mathrm{Cov}(x,y) & \mathrm{Cov}(y,y)
 \end{pmatrix}
@@ -182,6 +182,38 @@ E(x^2)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} x^2Ke^{-(x^2+3xy+3y^2)
 E(y^2)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} y^2Ke^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
 &=&\int^{+\infty}_{-\infty} e^{-(x+\frac{3}{2}y)^2}\mathrm{d}(x+\frac{3}{2}y)\mathrm{d}y\\
 &=&\int^{+\infty}_{-\infty}Ky^2e^{-\frac{3y^2}{4}}\sqrt{\pi}\mathrm{d}y = \dfrac{4K\pi}{3\sqrt{3}}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+E(xy)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} xy Ke^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty}Ke^{-\frac{3y^2}{4}}\int^{+\infty}_{-\infty} (ty-\frac{3}{2}y^2) e^{-t^2} \mathrm{d}t\mathrm{d}y\\
+&=&-\frac{3}{2}K\sqrt{\pi}\int^{+\infty}_{-\infty}y^2e^{-\frac{3y^2}{4}}\mathrm{d}y\\
+&=&-\frac{3}{2}K\sqrt{\pi}\dfrac{1}{2\times\frac{3}{4}}\sqrt{\frac{4}{3}\pi}=-\frac{2K\pi}{\sqrt{3}
+}
+\end{eqnarray*}
+上面计算中，$t=x+\frac{3}{2}y$。所以,$x$与$y$协方差矩阵为:
+\begin{eqnarray*}
+S=\begin{pmatrix}
+ \dfrac{4K\pi}{\sqrt{3}} & -\dfrac{2K\pi}{\sqrt{3}} \\
+-\dfrac{2K\pi}{\sqrt{3}} &   \dfrac{4K\pi}{3\sqrt{3}}
+\end{pmatrix}
+\end{eqnarray*}
+
+\item[注：]
+此处可以通过归一化条件将$K$值求出来，最后的协方差矩阵还可以进一步化简。归一化条件要求:
+\begin{eqnarray*}
+\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty}  Ke^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y=1
+\end{eqnarray*}
+\begin{eqnarray*}
+&&\int^{+\infty}_{-\infty}e^{-\frac{3y^2}{4}}\int^{+\infty}_{-\infty}  e^{-t^2} \mathrm{d}t\mathrm{d}y=\int^{+\infty}_{-\infty}e^{-\frac{3y^2}{4}}\mathrm{d}y\int^{+\infty}_{-\infty}  e^{-t^2} \mathrm{d}t\\
+&&=\sqrt{\pi}\sqrt{\frac{4}{3}\pi}=\frac{2\pi}{\sqrt{3}}
+\end{eqnarray*}
+因此$K=\frac{\sqrt{3}}{2\pi}$。$x$与$y$的协方差矩阵可以进一步简化为:
+\begin{eqnarray*}
+S=\begin{pmatrix}
+ 2 & -1 \\
+-1 &  \dfrac{2}{3}
+\end{pmatrix}
 \end{eqnarray*}
 \end{itemize}
 \end{CJK*}
