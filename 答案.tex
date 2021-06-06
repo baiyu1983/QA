@@ -139,7 +139,49 @@ b)计算$x$与$y$的协方差矩阵。
 $x$的期望值为：
 \begin{eqnarray*}
 E(x)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} xKe^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
-&=&K\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} x e^{-((x+\frac{3y}{2})^2+\frac{3}{4}y^2)} \mathrm{d}x\mathrm{d}y
+&=&K\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} x e^{-((x+\frac{3y}{2})^2+\frac{3}{4}y^2)} \mathrm{d}x\mathrm{d}y\\
+&=&K\int^{+\infty}_{-\infty}e^{-\frac{3}{4}y^2}\int^{+\infty}_{-\infty} (x+\frac{3}{2}y-\frac{3}{2}y) e^{-(x+\frac{3y}{2}y)^2} \mathrm{d}(x+\frac{3y}{2}y)\mathrm{d}y\\
+&=&K\int^{+\infty}_{-\infty}e^{-\frac{3}{4}y^2}\int^{+\infty}_{-\infty} -\frac{3}{2}y e^{-(x+\frac{3y}{2}y)^2} \mathrm{d}(x+\frac{3y}{2}y)\mathrm{d}y\\
+&=&-K\int^{+\infty}_{-\infty}e^{-\frac{3}{4}y^2} \frac{3}{2}Cy \mathrm{d}y\\
+&=&0
+\end{eqnarray*}
+同理可以计算出$E(y)=0$。
+$x$和$y$的协方差矩阵为：
+\begin{eqnarray*}
+\begin{pmatrix}
+\mathrm{Cov}(x,x) & \mathrm{Cov}(x,y) \\
+\mathrm{Cov}(x,y) & \mathrm{Cov}(y,y)
+\end{pmatrix}
+\end{eqnarray*}
+其中:
+\begin{eqnarray*}
+&&\mathrm{Cov}(x,x) = \sigma^2_x = E[(x-E(x))^2]=E(x^2)\\
+&&\mathrm{Cov}(y,y) = \sigma^2_y = E[(y-E(y))^2]=E(y^2) \\
+&&\mathrm{Cov}(x,y) = E[(x-E(x))(y-E(y))]=E(xy)
+\end{eqnarray*}
+在计算中，我们会用到正态分布的一些性质：
+\begin{eqnarray}
+&&\int^{+\infty}_{-\infty} \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}}\mathrm{d}x = 1\\
+&&\int^{+\infty}_{-\infty} \frac{x^2}{\sqrt{2\pi}\sigma} e^{-\frac{x^2}{2\sigma^2}} \mathrm{d}x= \sigma^2
+\end{eqnarray}
+其中第一个等式为正态分布归一化条件，第二个等式为正态分布方差性质。由此可得：
+\begin{eqnarray}
+&&\int^{+\infty}_{-\infty}  e^{-Ax^2}\mathrm{d}x = \sqrt{\dfrac{\pi}{A}}\\
+&&\int^{+\infty}_{-\infty}  x^2 e^{-Ax^2}\mathrm{d}x = \dfrac{1}{2A}\sqrt{\dfrac{\pi}{A}}
+\end{eqnarray}
+下面计算协方差矩阵元：
+\begin{eqnarray*}
+E(x^2)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} x^2Ke^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty}Ke^{-\frac{3y^2}{4}}\int^{+\infty}_{-\infty} [(x+\frac{3}{2}y)-\frac{3}{2}y]^2 e^{-(x+\frac{3}{2}y)^2}\mathrm{d}(x+\frac{3}{2}y)\mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty}Ke^{-\frac{3y^2}{4}}\int^{+\infty}_{-\infty} (t^2-3ty+\frac{9}{4}y^2)e^{-t^2}\mathrm{d}t \mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty}Ke^{-\frac{3y^2}{4}}(\frac{\sqrt{\pi}}{2}+\frac{9\sqrt{\pi}}{4}y^2)\mathrm{d}y \\
+&=&\frac{\sqrt{\pi}K}{2}\sqrt{\frac{4}{3}\pi}+\frac{9K}{4}\sqrt{\pi}\dfrac{1}{2\times\frac{3}{4}}\sqrt{\frac{4}{3}\pi}=\sqrt{\frac{\pi}{3}}+\sqrt{3\pi}=\frac{4K\pi}{\sqrt{3}}
+\end{eqnarray*}
+
+\begin{eqnarray*}
+E(y^2)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} y^2Ke^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty} e^{-(x+\frac{3}{2}y)^2}\mathrm{d}(x+\frac{3}{2}y)\mathrm{d}y\\
+&=&\int^{+\infty}_{-\infty}Ky^2e^{-\frac{3y^2}{4}}\sqrt{\pi}\mathrm{d}y = \dfrac{4K\pi}{3\sqrt{3}}
 \end{eqnarray*}
 \end{itemize}
 \end{CJK*}
