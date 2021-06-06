@@ -7,13 +7,139 @@
 \begin{CJK*}{GBK}{song}
 \begin{itemize}
 \item[1)]
-若与变量x与y满足线性关系$y=kx+b$，现有一组测量值$(x_1,y_1 ),(x_2,y_2 )…(x_N,y_N )$，若在每一个测量点，对x的测量没有误差，对y的测量误差相同，试推导出用最小二乘法得到的k和b的估计值，用x与y测量值表示。\\
-（选做）若在每个测量点，对$x$的测量没有误差，对$y$的测量误差各不相同（第$i$个测量点$y$的误差为$\delta_i$），试推导最小二乘法给出的$k$和$b$的估计值，用$x$与$y$的测量值及$y$的测量误差表示
+若与变量x与y满足线性关系$y=kx+b$，现有一组测量值$(x_1,y_1 ),(x_2,y_2 )…(x_N,y_N )$，若在每一个测量点，对x的测量没有误差，对y的测量误差相同，试推导出用最小二乘法得到的k和b的估计值，用x与y 测量值表示。\\
+（选做）若在每个测量点，对$x$的测量没有误差，对$y$的测量误差各不相同（第$i$个测量点$y$的误差为$\delta_i$），试推导最小二乘法给出的$k$和$b$的估计值，用$x$与$y$ 的测量值及$y$的测量误差表示
 \item[答:]若每个测量点$y$值测量误差都相等，$\chi^2(k, b|x,y)=\dfrac{1}{\delta^2}\sum^{i=N}_{i=1}(y_i-kx_i-b)^2$。
 最小二乘法要求：
 \begin{eqnarray*}
 \dfrac{\partial\chi^2}{\partial k}&=&2\sum^{i=N}_{i=1}(y_i-kx_i-b)x_i=0 \\
 \dfrac{\partial\chi^2}{\partial b}&=&2\sum^{i=N}_{i=1}(y_i-kx_i-b)=0
+\end{eqnarray*}
+上式两边除以$N$，可以表示为:
+\begin{eqnarray*}
+\bar{xy}-k\bar{x^2}-\bar{x}b=0 \\
+\bar{y} -k\bar{x} -b =0
+\end{eqnarray*}
+解得:
+\begin{eqnarray*}
+k &=&(\bar{xy}-\bar{x}\bar{y})/(\bar{x^2}-{\bar{x}^2}) \\
+b &=& \bar{y} -k\bar{x}
+\end{eqnarray*}
+其中$k$还有多种用协方差和关联函数表示方法，如$k=\mathrm{Cov}(x,y)/\sigma^2_x$， 或是$k=\mathrm{Corr}(x,y)\dfrac{\sigma_y}{\sigma_x}$。\par
+如每个点的误差不相等，那么根据最小二乘法:
+\begin{eqnarray*}
+\dfrac{\partial\chi^2}{\partial k}&=&2\sum^{i=N}_{i=1}\dfrac{(y_i-kx_i-b)x_i}{\delta^2_i}=0 \\
+\dfrac{\partial\chi^2}{\partial b}&=&2\sum^{i=N}_{i=1}\dfrac{(y_i-kx_i-b)}{\delta^2_i}=0
+\end{eqnarray*}
+解得：
+\begin{eqnarray*}
+k &=& (\bar{xy}_\delta C-\bar{x_\delta}\bar{y_\delta})/(\bar{x^2_\delta}C-\bar{x_\delta}^2)\\
+b &=& (\bar{y_\delta}-k \bar{x_\delta})/C
+\end{eqnarray*}，
+其中：
+\begin{eqnarray*}
+\bar{x_\delta} &=& \dfrac{1}{N}\sum^{i=N}_{i=1}\dfrac{x_i}{\delta^2_i}\\
+\bar{y_\delta} &=& \dfrac{1}{N}\sum^{i=N}_{i=1}\dfrac{y_i}{\delta^2_i}\\
+\bar{xy}_\delta &=& \dfrac{1}{N}\sum^{i=N}_{i=1}\dfrac{x_i y_i}{\delta^2_i}\\
+\bar{x^2_\delta} &=& \dfrac{1}{N}\sum^{i=N}_{i=1}\dfrac{x^2_i}{\delta^2_i} \\
+C &=& \dfrac{1}{N}\sum^{i=N}_{i=1}\dfrac{1}{\delta^2_i}
+\end{eqnarray*}
+\item[2)]
+泊松分布的PDF为$P(n|\mu)=\dfrac{\mu^n}{n!}e^{-\mu}$，其中参数$\mu$为非负实数，变量$n$为非负整数。若对某个满足泊松分布的变量进行了$m$次独立测量，测量结果分别为$n_1,n_2,…,n_m$，试根据这组数据，是用最大似然法估计该分布的参数$\mu$。
+\item[答：]
+\begin{eqnarray*}
+&&-\ln L = m\mu-\sum^{i=m}_{i=1}n_i\ln\mu+\sum^{i=m}_{i=1}\ln n_i !\\
+&&\dfrac{\partial(-\ln L)}{\partial\mu} |_{\mu=\hat{\mu}}= m-\dfrac{1}{\hat{\mu}}\sum^{i=m}_{i=1}n_i =0\\
+&&\hat\mu = \dfrac{1}{m}\sum^{i=m}_{i=1}n_i
+\end{eqnarray*}
+\item[3)]
+\begin{itemize}
+\item[a)]
+估算满足泊松分布变量的期望值$E(n)$和协方差: $E[(n-\mu)^2]$。
+\item[答：]
+\begin{eqnarray*}
+E(n) &=& \sum^{k=+\infty}_{k=0}k\dfrac{\mu^k}{k!}e^{-\mu}\\
+     &=& \sum^{k=+\infty}_{k=1}\dfrac{\mu^k}{(k-1)!}e^{-\mu}\\
+     &=& \sum^{k=+\infty}_{k=0}\dfrac{\mu^{k+1}}{k!}e^{-\mu}\\
+     &=& \mu \sum^{k=+\infty}_{k=0}\dfrac{\mu^{k}}{k!}e^{-\mu} =\mu
+\end{eqnarray*}
+其中最后一步用了泊松分布的归一化性质：$\sum^{k=+\infty}_{k=0}\dfrac{\mu^{k}}{k!}e^{-\mu}=e^{\mu}e^{-\mu}=1$。
+\begin{eqnarray*}
+E[(n-\mu)^2]&=&E(n^2-2n\mu+\mu^2)\\
+&=&\sum^{k=+\infty}_{k=0}k^2\dfrac{\mu^k}{k!}e^{-\mu}-2\mu E(n)+\mu^2\\
+&=&\sum^{k=+\infty}_{k=0}k(k-1)\dfrac{\mu^k}{k!}e^{-\mu}+\sum^{k=+\infty}_{k=0}k\dfrac{\mu^k}{k!}e^{-\mu}-\mu^2\\
+&=&\sum^{k=+\infty}_{k=2}\dfrac{\mu^{k}}{(k-2)!}e^{-\mu}+\mu-\mu^2\\
+&=&\mu^2\sum^{k=+\infty}_{k=0}\dfrac{\mu^{k}}{k!}e^{-\mu}+\mu-\mu^2\\
+&=&\mu^2+\mu-\mu^2=\mu
+\end{eqnarray*}
+\item[b)]
+若$k$个独立的随机变量($n_1,n_2,n_3,...,n_k$)分别满足参数为($\mu_1,\mu_2,…,\mu_k$)的泊松分布，证明这$k$个随机变量的和$N=n_1+n_2+…+n_k$满足参数为$\mu=\mu_1+\mu_2+...+\mu_k$的泊松分布。
+\item[答：]
+考虑两个独立的随机变量：$n_1$和$n_2$，分别满足参数为$\mu_1$和$\mu_2$的泊松分布。则他们的联合PDF函数为$f(n_1,n_2) = \dfrac{\mu_1^{n_1}\mu_2^{n_2}}{n_1!n_2!}e^{-(\mu_1+\mu_2)}$。
+观察到$n_1$和$n_2$之和为$N$的机率为:
+\begin{eqnarray*}
+&&\sum_{n_1+n_2=N}f(n_1,n_2)\\
+&=&e^{-(\mu_1+\mu_2)}\sum_{n_1+n_2=N}\dfrac{\mu_1^{n_1}\mu_2^{n_2}}{n_1!n_2!}\\
+&=&\dfrac{e^{-(\mu_1+\mu_2)}}{N!}\sum_{n_1+n_2=N}\dfrac{N!}{n_1!n_2!}\mu_1^{n_1}\mu_2^{n_2}\\
+&=&\dfrac{e^{-(\mu_1+\mu_2)}}{N!}(\mu_1+\mu_2)^N
+\end{eqnarray*}
+所以$n_1+n_2$满足$\mu_1+\mu_2$的分布。因此通过数学归纳法，不难证明对$k$个独立泊松分布随机变量，其和满足$\mu=\mu_1+\mu_2+...+\mu_k$的泊松分布。
+\item[注：]
+这个证明使用了二项式展开公式$(a+b)^N=\sum ^{k=N}_{k=0}\dfrac{N!}{k!(N-k)!}a^k b^{N-k}=\sum_{k_1+k_2=N}\dfrac{N!}{k_1!k_2!}a^k_1 b^k_2$。若用多项式展开公式$(\sum^{i=n}_{i=1}a_i)^N=\sum_{k_1+k_2+...+k_n=N}\dfrac{N!}{k_1!k_2!...k_n!}a_1^{k_1}a_2^{k_2}...a_n^{k_n}$可直接得证。
+\end{itemize}
+\item[4)]
+若一所学校有$m$个班级，分别有$n_i$个学生($1\le i \le m$)，现在在学校里随机抽选学生（每一个学生被抽到的几率相同），调查他们所在班级的人数，最后将抽查到的每个学生所在的班级人数求平均来估计每个班级的平均人数。这样的估计偏差是多少？
+\item[答：]
+显然，平均每个班人数为$\bar{n}=\dfrac{N}{m}$，其中$N=\sum^{i=m}_{i=1}n_i$为学校总人数。而通过在学校随机抽选学生的方法，抽到第$i$个班的学生几率为$n_i/N$。因此这样调研出来的班级平均人数期望值为$\sum^{i=m}_{i=1}\dfrac{n_i^2}{N}$。所以偏差为$\sum^{i=m}_{i=1}\dfrac{n_i^2}{N}-\bar{n}$。这个表达式可以用各个班级人数$n_i$的均方差表示。$n_i$均方差为$\sigma_n^2=\dfrac{\sum^{i=m}_{i=1}n_i^2}{m}-N^2/m^2=\bar{n}(\dfrac{\sum^{i=m}_{i=1}n_i^2}{N}-\bar{n})$。所以要算的偏差为$\sigma_n^2/\bar{n}$。
+\item[注：]
+这个问题是检查悖论(Inspection Paradox)的一个典型例子。这是一种由于样本空间的改变引起的偏差。在统计每个班级人数时，样本空间为这$m$个班级，每个班级是平权的；但是在通过随机选定的学生调查时，调查样本对每个学生是平权的，但是对每个班级并不平权（人数多的班级几率更大，所以权重更高）。类似的问题还有不少，如公交车悖论（乘客平均等待时间往往比公交平均发车间隔长）等。
+\item[5)]
+若一个随机变换的电压值满足1.7V-1.8V之间的均匀分布，现在用一个量程为0-2 V，显示精度为0.01V的数显电压表去测量这个电压，那么由于电压表显示精度造成的测量误差为多少？
+\item[答：]
+在电压真值为$U$~（$1.7\mathrm{V} \le U \le 1.8 \mathrm{V}$）的情况下，测量值$U_M = [100 U]/100$。显然，$U_M-U$是一个周期为0.01~V的周期函数。我们只要计算它在一共周期内的误差。
+电压表显示精度可用平均平方(MSE)估算:
+\begin{eqnarray*}
+E[(U_M-U)^2]&=&\dfrac{1}{0.1~\mathrm{V}}\int^{1.8~\mathrm{V}}_{1.7~\mathrm{V}}(U_M-U)^2 dU\\
+&=&\dfrac{1}{0.01~\mathrm{V}}\int^{1.71~\mathrm{V}}_{1.70~\mathrm{V}}(U_M~\mathrm{V}-U)^2 dU\\
+&=&\dfrac{1}{0.01~\mathrm{V}}\int^{1.71~\mathrm{V}}_{1.70~\mathrm{V}}(1.70~\mathrm{V}-U)^2 dU\\
+&=&\dfrac{1}{0.01~\mathrm{V}}\int^{0.01~\mathrm{V}}_{0~\mathrm{V}}u^2 du\\
+&=&\dfrac{10^{-4}}{3} \mathrm{V^2}
+\end{eqnarray*}
+\item[注：]
+因为这个电压表读数总是小于或等于电压真值，所以测量结果是有偏差的。该偏差为$E(U_M-U)=-0.005$~V。如将每次测量结果加上0.005~V，就可消除这个偏差，那么$E[(U_M-U)^2]=\dfrac{10^{-4}}{12} \mathrm{V^2}$。
+一般的，在含有偏差的情况下，MSE为$b^2+\sigma^2$，其中$b$为偏差，$\sigma^2$为方差。在这个问题中，$b^2$和$\sigma^2$分别为$\dfrac{10^{-4}}{4} \mathrm{V^2}$ 和$\dfrac{10^{-4}}{12} \mathrm{V^2}$。
+\item[6)]
+考虑通过测量一个金属小球的直径来估算其体积，若每次测量结果满足正态分布$P(d | d_T,\sigma)=\dfrac{1}{\sqrt{2\pi} \sigma} e^{\frac{-(d-d_T )^2}{2\sigma^2 }}$ ，其中$d$为小球直径的测量值，$d_T$ 为小球直径真值，且$\sigma \ll d_T$。
+现在考虑两种估算方法：
+\begin{itemize}
+    \item[a)] 对小球直径进行多次测量，得到直径测量值$(d_1,d_2...,d_N)$，将这些测量值的平均值$\bar{d}=(d_1+d_2+...+d_N)/N$当作小球直径，估算出小球体积$V=\dfrac{1}{6}\pi \bar{d}^3$。
+    \item[b)]对小球直径进行多次测量，得到直径测量值$(d_1,d_2,...,d_N)$，根据这些直径估算出体积$(V_1,V_2,...,V_N)$，其中$V_i=\dfrac{1}{6} \pi d_i^3$，最终估算小球体积为其平均值$V=\bar{V}=(V_1+V_2+...+V_N)/N$。
+\end{itemize}
+请判断a)和b)两种方法分别是否是对小球体积的无偏估计（如果不是无偏估计试对偏差进行估计）？它们又是否是小球体积的一致估计？
+\item[答：]
+两者都不是无偏估计，a)为有一致估计，b)不是一致估计。
+首先看下b)中估算出来的体积偏差。按照b)中的测量方法，体积的期望值为：
+\begin{eqnarray*}
+&& E(\frac{1}{6}\pi d^3)\\
+&=&\frac{1}{6}\pi \int ^{+\infty}_{-\infty}d^3\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-(d-d_T )^2}{2\sigma^2 }} \mathrm{d}d \\
+&=& \frac{1}{6}\pi \int ^{+\infty}_{-\infty}(t+d_T)^3\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-t^2}{2\sigma^2 }} \mathrm{d}t \\
+&=&\frac{1}{6}\pi \int ^{+\infty}_{-\infty}(t^3+3t^2d_T+3td_T^2+d_T^3)\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-t^2}{2\sigma^2 }} \mathrm{d}t \\
+&=&\frac{1}{6}\pi \int ^{+\infty}_{-\infty}(3t^2d_T+d_T^3)\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-t^2}{2\sigma^2 }} \mathrm{d}t \\
+&=&\frac{3d_T}{6}\pi \int ^{+\infty}_{-\infty}(t^2)\frac{1}{\sqrt{2\pi}\sigma}e^{\frac{-t^2}{2\sigma^2 }} \mathrm{d}t+\frac{1}{6}\pi d_T^3 \\
+&=&\frac{3d_T\sigma^2}{6}\pi + \frac{1}{6}\pi d_T^3\\
+&=&V_T(1+3\sigma^2/d_T^2)
+\end{eqnarray*}
+式中$V_T=\frac{1}{6}\pi d_T^3$为小球体积真值。可见测量偏差为$3V_T\sigma^2/d_T^2$。可见方法b)不是无偏的。而随着测量次数$N\rightarrow \infty$，平均体积$\bar{V}$会趋于中心值为$V_T(1+3\sigma^2/d_T^2)$，的正态分布，故这个偏差无法随着$N\rightarrow \infty$而趋于0。可见方法b)也不是小球体积的一致估计。
+而在a)的方法中，根据中心极限定理，$N\rightarrow \infty$时，$\bar{d}$会趋于中心值为$d_T$,$\sigma^2$为$\sigma^2/N$的正态分布。根据前面的讨论，用$\bar{d}$计算体积会导致$V_T(1+\frac{3\sigma^2}{N d_T^2})$的偏差。但是这个偏差显然随着$N\rightarrow \infty$而趋于0。所以a)为一致估计，但不是无偏估计。
+\item[7)]
+若随机变量x与y二维正态分布：$P(x,y)=K e^{-(x^2+3xy+3y^2)}$，其中K为归一化常数：
+a)计算$x$与$y$的期望值
+b)计算$x$与$y$的协方差矩阵。
+\item[答]
+$x$的期望值为：
+\begin{eqnarray*}
+E(x)&=&\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} xKe^{-(x^2+3xy+3y^2)} \mathrm{d}x\mathrm{d}y\\
+&=&K\int^{+\infty}_{-\infty}\int^{+\infty}_{-\infty} x e^{-((x+\frac{3y}{2})^2+\frac{3}{4}y^2)} \mathrm{d}x\mathrm{d}y
 \end{eqnarray*}
 \end{itemize}
 \end{CJK*}
